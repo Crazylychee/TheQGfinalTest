@@ -13,7 +13,10 @@ import java.util.List;
  */
 public class CategoryDAO {
 
-    //得到总数
+    /**
+     * 得到总数
+     * @return
+     */
     public int getTotal(){
         int total=0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement()){

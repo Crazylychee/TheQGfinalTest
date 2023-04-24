@@ -1,9 +1,6 @@
 package com.crazylychee.dao;
 
-/**
- * @author yc
- * @date 2023/4/24 11:47
- */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +14,10 @@ import com.crazylychee.bean.Order;
 import com.crazylychee.bean.User;
 import com.crazylychee.util.DBUtil;
 import com.crazylychee.util.DateUtil;
-
+/**
+ * @author yc
+ * @date 2023/4/24 11:47
+ */
 public class OrderDAO {
     public static final String waitPay = "waitPay";
     public static final String waitDelivery = "waitDelivery";

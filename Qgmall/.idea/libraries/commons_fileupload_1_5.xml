@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="commons-fileupload-1.5">
+    <CLASSES>
+      <root url="jar://D:/yc/tomcat_for_tmall/commons-fileupload-1.5-bin/commons-fileupload-1.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

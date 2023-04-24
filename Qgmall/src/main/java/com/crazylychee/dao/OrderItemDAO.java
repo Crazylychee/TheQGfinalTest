@@ -1,9 +1,6 @@
 package com.crazylychee.dao;
 
-/**
- * @author yc
- * @date 2023/4/24 11:45
- */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +15,10 @@ import com.crazylychee.bean.OrderItem;
 import com.crazylychee.bean.Product;
 import com.crazylychee.bean.User;
 import com.crazylychee.util.DBUtil;
-
+/**
+ * @author yc
+ * @date 2023/4/24 11:45
+ */
 public class OrderItemDAO {
 
     public int getTotal() {
@@ -47,9 +47,9 @@ public class OrderItemDAO {
 
             //订单项在创建的时候，是没有订单信息的
             if(null==bean.getOrder())
-                ps.setInt(2, -1);
+            {ps.setInt(2, -1);}
             else
-                ps.setInt(2, bean.getOrder().getId());
+            {ps.setInt(2, bean.getOrder().getId());}
 
             ps.setInt(3, bean.getUser().getId());
             ps.setInt(4, bean.getNumber());
@@ -73,9 +73,9 @@ public class OrderItemDAO {
 
             ps.setInt(1, bean.getProduct().getId());
             if(null==bean.getOrder())
-                ps.setInt(2, -1);
+            {ps.setInt(2, -1);}
             else
-                ps.setInt(2, bean.getOrder().getId());
+            {ps.setInt(2, bean.getOrder().getId());}
             ps.setInt(3, bean.getUser().getId());
             ps.setInt(4, bean.getNumber());
 

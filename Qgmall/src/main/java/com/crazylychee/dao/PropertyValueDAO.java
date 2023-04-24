@@ -1,9 +1,6 @@
 package com.crazylychee.dao;
 
-/**
- * @author yc
- * @date 2023/4/24 11:37
- */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +13,10 @@ import com.crazylychee.bean.Product;
 import com.crazylychee.bean.Property;
 import com.crazylychee.bean.PropertyValue;
 import com.crazylychee.util.DBUtil;
-
+/**
+ * @author yc
+ * @date 2023/4/24 11:37
+ */
 public class PropertyValueDAO {
 
     public int getTotal() {

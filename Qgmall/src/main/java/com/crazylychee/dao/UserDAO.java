@@ -11,7 +11,10 @@ import java.util.List;
 
 import com.crazylychee.bean.User;
 import com.crazylychee.util.DBUtil;
-
+/**
+ * @author yc
+ * @date 2023/4/24 11:53
+ */
 public class UserDAO {
 
     public int getTotal() {

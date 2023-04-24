@@ -1,9 +1,6 @@
 package com.crazylychee.dao;
 
-/**
- * @author yc
- * @date 2023/4/24 11:53
- */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +15,10 @@ import com.crazylychee.bean.Review;
 import com.crazylychee.bean.User;
 import com.crazylychee.util.DBUtil;
 import com.crazylychee.util.DateUtil;
-
+/**
+ * @author yc
+ * @date 2023/4/24 11:53
+ */
 public class ReviewDAO {
 
     public int getTotal() {

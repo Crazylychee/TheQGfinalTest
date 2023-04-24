@@ -1,9 +1,6 @@
 package com.crazylychee.dao;
 
-/**
- * @author yc
- * @date 2023/4/24 11:35
- */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +12,10 @@ import java.util.List;
 import com.crazylychee.bean.Product;
 import com.crazylychee.bean.ProductImage;
 import com.crazylychee.util.DBUtil;
-
+/**
+ * @author yc
+ * @date 2023/4/24 11:35
+ */
 public class ProductImageDAO {
 
     public static final String type_single = "type_single";
