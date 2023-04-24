@@ -8,7 +8,7 @@ import java.util.List;
  * @date 2023/4/23 23:57
  */
 public class Order {
-    private String userCode;
+    private String orderCode;
     private String address;
     private String post;
     private String receiver;
@@ -20,17 +20,17 @@ public class Order {
     private Date confirmDate;
     private User user;
     private int id;
-    private List<orderItem> orderItems;
+    private List<OrderItem> OrderItems;
     private float total;
     private int totalNumber;
     private String status;
 
-    public String getUserCode() {
-        return userCode;
+    public String getOrderCode() {
+        return orderCode;
     }
 
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 
     public String getAddress() {
@@ -121,12 +121,12 @@ public class Order {
         this.id = id;
     }
 
-    public List<orderItem> getOrderItems() {
-        return orderItems;
+    public List<OrderItem> getOrderItems() {
+        return OrderItems;
     }
 
-    public void setOrderItems(List<orderItem> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderItems(List<OrderItem> OrderItems) {
+        this.OrderItems = OrderItems;
     }
 
     public float getTotal() {

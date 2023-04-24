@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Review {
     private String content;
-    private Date creatDate;
+    private Date createDate;
     private int id;
     private Product product;
     private User user;
@@ -21,12 +21,12 @@ public class Review {
         this.content = content;
     }
 
-    public Date getCreatDate() {
-        return creatDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatDate(Date creatDate) {
-        this.creatDate = creatDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public int getId() {

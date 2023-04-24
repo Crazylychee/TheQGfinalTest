@@ -10,12 +10,13 @@ import java.util.List;
 public class Product {
     private String name;
     private String subTitle;
-    private float originalPrice;
+    private float orignalPrice;
     private float promotePrice;
     private int stock;
     private Date createDate;
+    private Category category;
     private int id;
-    private ProductImage FristImages;
+    private ProductImage firstProductImage;
     private List<ProductImage> productImages;
     private List<ProductImage> ProductDetailImages;
     private List<ProductImage> ProductSingleImages;
@@ -38,12 +39,12 @@ public class Product {
         this.subTitle = subTitle;
     }
 
-    public float getOriginalPrice() {
-        return originalPrice;
+    public float getOrignalPrice() {
+        return orignalPrice;
     }
 
-    public void setOriginalPrice(float originalPrice) {
-        this.originalPrice = originalPrice;
+    public void setOrignalPrice(float orignalPrice) {
+        this.orignalPrice = orignalPrice;
     }
 
     public float getPromotePrice() {
@@ -78,12 +79,12 @@ public class Product {
         this.id = id;
     }
 
-    public ProductImage getFristImages() {
-        return FristImages;
+    public ProductImage getFirstProductImage() {
+        return firstProductImage;
     }
 
-    public void setFristImages(ProductImage fristImages) {
-        FristImages = fristImages;
+    public void setFirstProductImage(ProductImage firstProductImage) {
+        this.firstProductImage = firstProductImage;
     }
 
     public List<ProductImage> getProductImages() {
@@ -125,6 +126,15 @@ public class Product {
     public void setSaleCount(int saleCount) {
         this.saleCount = saleCount;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return name;

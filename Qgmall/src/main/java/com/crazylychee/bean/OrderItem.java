@@ -4,7 +4,7 @@ package com.crazylychee.bean;
  * @author yc
  * @date 2023/4/24 0:41
  */
-public class orderItem {
+public class OrderItem {
     private int number;
     private Product product;
     private User user;
