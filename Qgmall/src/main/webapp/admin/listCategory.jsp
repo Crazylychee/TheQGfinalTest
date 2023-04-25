@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
  
@@ -34,8 +36,8 @@ $(function(){
 					<th>ID</th>
 					<th>图片</th>
 					<th>分类名称</th>
-<!-- 					<th>属性管理</th> -->
-<!-- 					<th>产品管理</th> -->
+					<th>属性管理</th>
+					<th>产品管理</th>
 					<th>编辑</th>
 					<th>删除</th>
 				</tr>
@@ -48,8 +50,8 @@ $(function(){
 					<td><img height="40px" src="img/category/${c.id}.jpg"></td>
 					<td>${c.name}</td>
 					 	
-<%-- 					<td><a href="admin_property_list?cid=${c.id}"><span class="glyphicon glyphicon-th-list"></span></a></td>					 --%>
-<%-- 					<td><a href="admin_product_list?cid=${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>					 --%>
+					<td><a href="admin_property_list?cid=${c.id}"><span class="glyphicon glyphicon-th-list"></span></a></td>					
+					<td><a href="admin_product_list?cid=${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>					
 					<td><a href="admin_category_edit?id=${c.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
 					<td><a deleteLink="true" href="admin_category_delete?id=${c.id}"><span class=" 	glyphicon glyphicon-trash"></span></a></td>
 	
@@ -73,7 +75,7 @@ $(function(){
 	    				<td><input  id="name" name="name" type="text" class="form-control"></td>
 	    			</tr>
 	    			<tr>
-	    				<td>分类图片</td>
+	    				<td>分类圖片</td>
 	    				<td>
 	    					<input id="categoryPic" accept="image/*" type="file" name="filepath" />
 	    				</td>

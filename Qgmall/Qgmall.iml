@@ -39,5 +39,7 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.20" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" name="commons-io-1.4" level="project" />
+    <orderEntry type="library" name="spring-web-3.2.0.M1" level="project" />
   </component>
 </module>
