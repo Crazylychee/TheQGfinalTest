@@ -9,8 +9,5 @@
         <module name="Qgmall" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Qgmall" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

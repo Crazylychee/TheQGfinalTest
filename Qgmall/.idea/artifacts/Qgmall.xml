@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Qgmall">
+    <output-path>$PROJECT_DIR$/web/WEB-INF/classes/artifacts/Qgmall</output-path>
+    <root id="archive" name="Qgmall.war">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/classes/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
