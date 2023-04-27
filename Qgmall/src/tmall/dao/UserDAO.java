@@ -35,7 +35,7 @@ public class UserDAO {
     }
 
     public void add(User bean) {
-
+        //这里的空是不插入数据
         String sql = "insert into user values(null ,? ,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 

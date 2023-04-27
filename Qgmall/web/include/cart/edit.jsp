@@ -6,6 +6,25 @@
 <div class="workingArea">
     <div class="panel panel-warning addDiv">
         <div class="panel-heading">修改个人信息</div>
+
+        <form method="post" class="addFormSingle" action="forepersonalPicUpdate" enctype="multipart/form-data">
+            <table class="addTable">
+                <tr>
+                    <td>修改头像 尺寸400X400 为佳</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="filepathSingle" type="file" name="filepath" />
+                    </td>
+                </tr>
+                <tr class="submitTR">
+                    <td align="center">
+                        <button type="submit" class="btn btn-success">提 交</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
         <div class="panel-body">
             <form method="post" id="addForm" action="foreeditInfo" enctype="application/www-form-urlencoded">
                 <table class="addTable">
@@ -27,10 +46,9 @@
 
                     </tr>
                     <tr>
-                        <td>修改头像</td>
-                        <td>
-                            <input id="userPic" accept="image/*" type="file" name="filepath" />
-                        </td>
+<%--                        <td>--%>
+<%--                            <input id="userPic" accept="image/*" type="file" name="filepath" />--%>
+<%--                        </td>--%>
                     </tr>
                     <tr class="submitTR">
                         <td colspan="2" align="center">
@@ -39,9 +57,10 @@
                     </tr>
                 </table>
             </form>
+            <td>修改头像</td>
+
         </div>
     </div>
-
 </div>
 <div class="footer">
 </div>

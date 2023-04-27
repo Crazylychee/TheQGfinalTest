@@ -5,4 +5,3 @@
 <%@include file="include/search.jsp"%>
 <%@include file="include/home/homePage.jsp"%>
 <%@include file="include/footer.jsp"%>	
-	

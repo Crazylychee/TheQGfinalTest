@@ -1,12 +1,15 @@
 
 package tmall.servlet;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +19,7 @@ import tmall.dao.*;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.web.util.HtmlUtils;
 
+import tmall.servlet.BaseBackServlet;
 import tmall.bean.Category;
 import tmall.bean.Order;
 import tmall.bean.OrderItem;
@@ -29,6 +33,7 @@ import tmall.comparator.ProductDateComparator;
 import tmall.comparator.ProductPriceComparator;
 import tmall.comparator.ProductReviewComparator;
 import tmall.comparator.ProductSaleCountComparator;
+import tmall.util.ImageUtil;
 import tmall.util.Page;
 
 public class ForeServlet extends BaseForeServlet {
@@ -440,6 +445,70 @@ public class ForeServlet extends BaseForeServlet {
 			user.setEmail("空");
 		}
 		new UserDAO().update(user);
+
+
+		return "personpage.jsp";
+	}
+
+
+	public String personalPicUpdate(HttpServletRequest request, HttpServletResponse response, Page page){
+		User user = (User) request.getSession().getAttribute("user");
+		//上传文件的输入流
+		InputStream is = null;
+		//提交上传文件时的其他参数
+		Map<String,String> params = new HashMap<>();
+
+		//解析上传，保存参数到params中
+		is =  parseUpload(request, params);
+
+		//根据上传的参数生成productImage对象
+		String type= params.get("type");
+		int id = user.getId();
+
+		//生成文件
+		String fileName = user.getId()+ ".jpg";
+		String imageFolder;
+		String imageFolder_small=null;
+
+		imageFolder = request.getSession().getServletContext().getRealPath("img/user");
+		imageFolder_small = request.getSession().getServletContext().getRealPath("img/user_small");
+
+		//创建新文件 imageFolder 是用于存储图像文件的文件夹的路径，fileName 是文件的名称
+		File f = new File(imageFolder, fileName);
+		//调用 f.getParentFile() 方法获取文件的父文件夹，并对其进行创建，以创建新的文件夹
+		f.getParentFile().mkdirs();
+
+		// 从输入流中复制文件
+		try {
+			//检查输入流 is 是否为 null，并且输入流 is 的可用性是否为 0
+			if(null!=is && 0!=is.available()){
+				//创建一个 FileOutputStream 对象 fos,并将其指向文件 f
+				try(FileOutputStream fos = new FileOutputStream(f)){
+					byte b[] = new byte[1024 * 1024];
+					int length = 0;
+					//:从输入流 is 中读取字节，并将其存储在字节数组 b 中。如果读取的字节数不是 -1，
+					// 则说明读取成功。
+					while (-1 != (length = is.read(b))) {
+						fos.write(b, 0, length);
+					}
+					//将写入的字节立即写入文件
+					fos.flush();
+					//通过如下代码，把文件保存为jpg格式
+					BufferedImage img = ImageUtil.change2jpg(f);
+					//将转换后的图像文件写入文件 f 中，保存为 jpg 格式
+					ImageIO.write(img, "jpg", f);
+
+					File f_small = new File(imageFolder_small, fileName);
+					ImageUtil.resizeImage(f, 217, 190, f_small);
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 		return "personpage.jsp";

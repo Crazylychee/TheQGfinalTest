@@ -85,19 +85,24 @@ public abstract class BaseBackServlet extends HttpServlet {
 	public InputStream parseUpload(HttpServletRequest request, Map<String, String> params) {
 			InputStream is =null;
 			try {
+				//该对象用于创建和管理文件上传过程中使用的磁盘文件对象
 	            DiskFileItemFactory factory = new DiskFileItemFactory();
+	            //使用该对象的 parseRequest 方法来解析 HTTP 请求中的文件上传请求
 	            ServletFileUpload upload = new ServletFileUpload(factory);
-	            // 设置上传文件的大小限制为10M
+	            // 在解析请求时，代码首先设置了上传文件的大小限制为 10M
 	            factory.setSizeThreshold(1024 * 10240);
-	             
+	            //这个集合是干嘛用的
 	            List items = upload.parseRequest(request);
+	            //然后获取了请求中所有的文件上传请求，并使用迭代器iter来遍历它们
 	            Iterator iter = items.iterator();
 	            while (iter.hasNext()) {
+					//对于每个文件上传请求，使用 FileItem 对象来获取上传文件的输入流
 	                FileItem item = (FileItem) iter.next();
 	                if (!item.isFormField()) {
-	                    // item.getInputStream() 获取上传文件的输入流
+	                    // item.getInputStream() 获取上传文件的输入流，如果上传文件不是表单字段，则使用输入流读取上传文件的内容
 	                    is = item.getInputStream();
 	                } else {
+	                	//将获取表单字段的值并将其编码为 UTF-8 格式，并将其存储在 Map 中以供后续使用
 	                	String paramName = item.getFieldName();
 	                	String paramValue = item.getString();
 	                	paramValue = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");
