@@ -57,15 +57,16 @@ public class UserDAO {
 
     public void update(User bean) {
 
-        String sql = "update user set name= ? , password = ? where id = ? ";
+        String sql = "update user set name= ? , password = ? , destination = ? , number = ? , email = ? where id = ? ";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
             ps.setString(1, bean.getName());
             ps.setString(2, bean.getPassword());
-            ps.setInt(3, bean.getId());
-
+            ps.setString(3,bean.getDestination());
+            ps.setString(4,bean.getNumber());
+            ps.setString(5,bean.getEmail());
+            ps.setInt(6, bean.getId());
             ps.execute();
-
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -136,7 +137,12 @@ public class UserDAO {
                 bean.setName(name);
                 String password = rs.getString("password");
                 bean.setPassword(password);
-
+                String destination = rs.getString("destination");
+                bean.setDestination(destination);
+                String number = rs.getString("number");
+                bean.setNumber(number);
+                String email = rs.getString("email");
+                bean.setEmail(email);
                 bean.setId(id);
                 beans.add(bean);
             }
@@ -188,9 +194,18 @@ public class UserDAO {
 
             if (rs.next()) {
                 bean = new User();
-                int id = rs.getInt("id");
+                int id = rs.getInt(1);
+
+                name = rs.getString("name");
                 bean.setName(name);
+                password = rs.getString("password");
                 bean.setPassword(password);
+                String destination = rs.getString("destination");
+                bean.setDestination(destination);
+                String number = rs.getString("number");
+                bean.setNumber(number);
+                String email = rs.getString("email");
+                bean.setEmail(email);
                 bean.setId(id);
             }
 

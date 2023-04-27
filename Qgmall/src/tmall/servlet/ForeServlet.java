@@ -10,8 +10,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tmall.dao.CategoryDAO;
-import tmall.dao.ProductImageDAO;
+import com.sun.org.apache.xpath.internal.operations.Equals;
+import org.apache.commons.lang.StringUtils;
+import tmall.dao.*;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.web.util.HtmlUtils;
 
@@ -28,8 +29,6 @@ import tmall.comparator.ProductDateComparator;
 import tmall.comparator.ProductPriceComparator;
 import tmall.comparator.ProductReviewComparator;
 import tmall.comparator.ProductSaleCountComparator;
-import tmall.dao.OrderDAO;
-import tmall.dao.ProductDAO;
 import tmall.util.Page;
 
 public class ForeServlet extends BaseForeServlet {
@@ -69,9 +68,6 @@ public class ForeServlet extends BaseForeServlet {
 		name = HtmlUtils.htmlEscape(name);
 		String password = request.getParameter("password");
 
-		System.out.println(name);
-		System.out.println(password);
-
 		try {
 			user = userDAO.get(name, password);
 		}catch (NullPointerException e){
@@ -81,9 +77,6 @@ public class ForeServlet extends BaseForeServlet {
 			}
 			e.printStackTrace();
 		}
-		System.out.println(user.getName());
-		System.out.println(user.getPassword());
-
 		request.getSession().setAttribute("user", user);
 
 		return "@forehome";
@@ -416,11 +409,39 @@ public class ForeServlet extends BaseForeServlet {
 	}
 
 	public String personpage(HttpServletRequest request, HttpServletResponse response, Page page){
+		return "personpage.jsp";
+	}
 
+	public String editInfo(HttpServletRequest request, HttpServletResponse response, Page page){
 
+		User user = (User) request.getSession().getAttribute("user");
+		System.out.println(request.getParameter("name"));
+		System.out.println(request.getParameter("email"));
+		System.out.println(request.getParameter("number"));
+		System.out.println(!StringUtils.isEmpty(request.getParameter("name")));
+		if (!StringUtils.isEmpty(request.getParameter("name"))){
+			user.setName(request.getParameter("name"));}
+		else {
+			user.setName("空");
+		}
+		if (!StringUtils.isEmpty(request.getParameter("destination"))){
+			user.setDestination(request.getParameter("destination"));}
+		else{
+			user.setDestination("空");
+		}
+		if (!StringUtils.isEmpty(request.getParameter("number"))){
+			user.setNumber(request.getParameter("number"));}
+		else{
+			user.setNumber("空");
+		}
+		if (!StringUtils.isEmpty(request.getParameter("email"))){
+			user.setEmail(request.getParameter("email"));}
+		else{
+			user.setEmail("空");
+		}
+		new UserDAO().update(user);
 
 
 		return "personpage.jsp";
-
 	}
 }

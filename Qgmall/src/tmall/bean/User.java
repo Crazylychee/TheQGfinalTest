@@ -8,6 +8,10 @@ public class User {
     private int id;
     private String name;
     private String password;
+    private String destination;
+    private String number;
+    private String email;
+
     public int getId() {
         return id;
     }
@@ -32,6 +36,30 @@ public class User {
         this.password = password;
     }
 
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getAnonymousname(String username){
         if (null==username){
