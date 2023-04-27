@@ -64,6 +64,7 @@ public class ForeServlet extends BaseForeServlet {
 	}
 
 	public String login(HttpServletRequest request, HttpServletResponse response, Page page) {
+		User user =null;
 		String name = request.getParameter("name");
 		name = HtmlUtils.htmlEscape(name);
 		String password = request.getParameter("password");
@@ -71,13 +72,20 @@ public class ForeServlet extends BaseForeServlet {
 		System.out.println(name);
 		System.out.println(password);
 
-		User user = userDAO.get(name, password);
-
-		if (null == user) {
-			request.setAttribute("msg", "账号密码错误");
-			return "login.jsp";
+		try {
+			user = userDAO.get(name, password);
+		}catch (NullPointerException e){
+			if (null == user) {
+				request.setAttribute("msg", "账号密码错误");
+				return "login.jsp";
+			}
+			e.printStackTrace();
 		}
+		System.out.println(user.getName());
+		System.out.println(user.getPassword());
+
 		request.getSession().setAttribute("user", user);
+
 		return "@forehome";
 	}
 
@@ -407,6 +415,12 @@ public class ForeServlet extends BaseForeServlet {
 		return "@forereview?oid=" + oid + "&showonly=true";
 	}
 
+	public String personpage(HttpServletRequest request, HttpServletResponse response, Page page){
 
 
+
+
+		return "personpage.jsp";
+
+	}
 }

@@ -1,3 +1,5 @@
+
+
 package tmall.util;
 
 import javax.imageio.ImageIO;
@@ -21,7 +23,7 @@ public class ImageUtil {
 			BufferedImage img = new BufferedImage(RGB_OPAQUE, raster, false, null);
 			return img;
 		} catch (InterruptedException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -30,12 +32,12 @@ public class ImageUtil {
 	public static void resizeImage(File srcFile, int width,int height, File destFile) {
 		try {
 			if(!destFile.getParentFile().exists())
-			{destFile.getParentFile().mkdirs();}
+				destFile.getParentFile().mkdirs();
 			Image i = ImageIO.read(srcFile);
 			i = resizeImage(i, width, height);
 			ImageIO.write((RenderedImage) i, "jpg", destFile);
 		} catch (IOException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -49,10 +51,12 @@ public class ImageUtil {
 
 			return buffImg;
 		} catch (Exception e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 
 }
+
+

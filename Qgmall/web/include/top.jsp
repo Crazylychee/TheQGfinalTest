@@ -9,7 +9,7 @@
 			qg购物网首页
 		</a>	
 		
-		<span>Hi! 欢迎来qg购物网</span>
+		<span>喵，欢迎来qg购物网</span>
 		
 		<c:if test="${!empty user}">
 			<a href="login.jsp">${user.name}</a>
@@ -23,9 +23,9 @@
 
 
 		<span class="pull-right">
-			<a href="foreinfoCenter">个人中心</a>
-			<a href="forestoreCenter">商家入驻</a>
 			<a href="forebought">我的订单</a>
+			<a href="forepersonpage">个人中心</a>
+			<a href="forebought">商家入驻</a>
 			<a href="forecart">
 			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
 			购物车<strong>${cartTotalItemNumber}</strong>件</a>		

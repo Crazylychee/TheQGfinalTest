@@ -1,25 +1,23 @@
-
+/**
+* 模仿天猫整站j2ee 教程 为how2j.cn 版权所有
+* 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关
+* 供购买者学习，请勿私自传播，否则自行承担相关法律责任
+*/	
 
 package tmall.filter;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.apache.commons.lang.StringUtils;
 import tmall.bean.Category;
 import tmall.bean.OrderItem;
 import tmall.bean.User;
 import tmall.dao.CategoryDAO;
 import tmall.dao.OrderItemDAO;
-import org.apache.commons.lang.StringUtils;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 public class ForeServletFilter implements Filter{
 	
@@ -52,10 +50,10 @@ public class ForeServletFilter implements Filter{
 			request.setAttribute("cs", cs);			
 		}
 		
-		String url = request.getRequestURI();
-		url =StringUtils.remove(url, contextPath);
-		if(url.startsWith("/fore")&&!url.startsWith("/foreServlet")){
-			String method = StringUtils.substringAfterLast(url,"/fore" );
+		String uri = request.getRequestURI();
+		uri =StringUtils.remove(uri, contextPath);
+		if(uri.startsWith("/fore")&&!uri.startsWith("/foreServlet")){
+			String method = StringUtils.substringAfterLast(uri,"/fore" );
 			request.setAttribute("method", method);
 			req.getRequestDispatcher("/foreServlet").forward(request, response);
 			return;
@@ -72,4 +70,8 @@ public class ForeServletFilter implements Filter{
 	
 }
 
-
+/**
+* 模仿天猫整站j2ee 教程 为how2j.cn 版权所有
+* 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关
+* 供购买者学习，请勿私自传播，否则自行承担相关法律责任
+*/	

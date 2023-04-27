@@ -40,7 +40,7 @@
 			    <a href="#nowhere" >商家中心</a>
 			</div>
             <div class="descColumn">
-			    <span class="descColumnTitle">qgmall购物网</span>
+			    <span class="descColumnTitle">qg购物网</span>
 			    <a href="#nowhere" ><img src="img/site/ma.png"></a> 
 			</div>
 			

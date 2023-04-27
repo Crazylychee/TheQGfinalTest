@@ -180,7 +180,7 @@ public class UserDAO {
     public User get(String name, String password) {
         User bean = null;
 
-        String sql = "select * from User where name = '?' and password=?";
+        String sql = "select * from User where name = ? and password=?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, name);
             ps.setString(2, password);

@@ -1,20 +1,19 @@
+/**
+* 模仿天猫整站j2ee 教程 为how2j.cn 版权所有
+* 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关
+* 供购买者学习，请勿私自传播，否则自行承担相关法律责任
+*/	
 
 package tmall.filter;
 
-import java.io.IOException;
-import java.util.Arrays;
+import org.apache.commons.lang.StringUtils;
+import tmall.bean.User;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import tmall.bean.User;
-import org.apache.commons.lang.StringUtils;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class ForeAuthFilter implements Filter{
 	
@@ -24,21 +23,6 @@ public class ForeAuthFilter implements Filter{
 		
 	}
 
-	/**
-	 * 这段代码是一个 Java Servlet 的 filter，它
-	 * 	用于验证请求是否需要进行身份验证。如果请求的 URL 中
-	 * 	包含前缀 /fore,并且该请求不是指向 /foreServlet
-	 * 	的，则该 filter 将检查请求的方法是否在列表 noNeedAuthPage
-	 * 	 中。如果不在列表中，则将重定向到登录页面。如果请求需要身份验证，
-	 * 	 则该 filter 将递归调用 chain.doFilter() 方法，以便将请求传递
-	 * 	 给下一个 filter 或 Servlet。否则，该 filter 将结束处理请求，
-	 * 	 并将响应重定向到登录页面
-	 * @param req
-	 * @param res
-	 * @param chain
-	 * @throws IOException
-	 * @throws ServletException
-	 */
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
@@ -81,3 +65,8 @@ public class ForeAuthFilter implements Filter{
 	
 }
 
+/**
+* 模仿天猫整站j2ee 教程 为how2j.cn 版权所有
+* 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关
+* 供购买者学习，请勿私自传播，否则自行承担相关法律责任
+*/	

@@ -1,23 +1,19 @@
+
+
 package tmall.util;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
-/**
- * @author yc
- * @date 2023/4/24 9:43
- */
 public class DateUtil {
-    public static Timestamp d2t(Date d){
-        if (null==d){return null;}
-        return new Timestamp(d.getTime());
-    }
 
-    public static Date t2d(Timestamp t){
-        if (null==t){
-            return null;
-        }
-        return new Date(t.getTime());
-    }
+	public static java.sql.Timestamp d2t(java.util.Date d) {
+		if (null == d)
+			return null;
+		return new java.sql.Timestamp(d.getTime());
+	}
 
+	public static java.util.Date t2d(java.sql.Timestamp t) {
+		if (null == t)
+			return null;
+		return new java.util.Date(t.getTime());
+	}
 }
+
