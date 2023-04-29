@@ -14,16 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import tmall.dao.*;
 import tmall.util.Page;
-import tmall.dao.CategoryDAO;
-import tmall.dao.OrderDAO;
-import tmall.dao.OrderItemDAO;
-import tmall.dao.ProductDAO;
-import tmall.dao.ProductImageDAO;
-import tmall.dao.PropertyDAO;
-import tmall.dao.PropertyValueDAO;
-import tmall.dao.ReviewDAO;
-import tmall.dao.UserDAO;
 
 public class BaseForeServlet extends HttpServlet{
 
@@ -36,8 +28,14 @@ public class BaseForeServlet extends HttpServlet{
 	protected PropertyValueDAO propertyValueDAO = new PropertyValueDAO();
 	protected ReviewDAO reviewDAO = new ReviewDAO();
 	protected UserDAO userDAO = new UserDAO();
+	protected StoreDAO storeDAO = new StoreDAO();
+	protected StarDAO starDAO = new StarDAO();
 
+
+	//　Service是类GenericServlet中最重要的方法，每次客户向服务器发出请求时，服务器就会调用这个方法
+	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) {
+		//一个通用的用于处理分页功能的控制器方法
 		try {
 
 			int start= 0;
@@ -52,22 +50,25 @@ public class BaseForeServlet extends HttpServlet{
 				count = Integer.parseInt(request.getParameter("page.count"));
 			} catch (Exception e) {
 			}
-
+			//通过请求参数获取分页的起始位置和要显示的记录数量，然后根据分页参数创建一个`Page`对象实例
 			Page page = new Page(start,count);
 
 			String method = (String) request.getAttribute("method");
-
+			//获取请求属性"method"的值
+//			并使用该值查找名为`method`的方法名所对应的`Method`对象实例
 			Method m = this.getClass().getMethod(method, HttpServletRequest.class,
 					HttpServletResponse.class,Page.class);
-
+			//一旦`Method`对象实例被找到，该方法使用`invoke()`方法调用指定的方法，并返回该方法的返回值
 			String redirect = m.invoke(this,request, response,page).toString();
-
+			//以 `@` 开始，则使用 `response.sendRedirect()` 方法将用户重定向到指定URL
 			if(redirect.startsWith("@"))
-				response.sendRedirect(redirect.substring(1));
+			{response.sendRedirect(redirect.substring(1));}
+			//以 `%` 开始，则使用 `response.getWriter().print()` 方法输出字符串
 			else if(redirect.startsWith("%"))
-				response.getWriter().print(redirect.substring(1));
+			{response.getWriter().print(redirect.substring(1));}
 			else
-				request.getRequestDispatcher(redirect).forward(request, response);
+			//request.getRequestDispathcer()` 方法将请求转发到指定的URL
+			{request.getRequestDispatcher(redirect).forward(request, response);}
 
 
 		} catch (Exception e) {

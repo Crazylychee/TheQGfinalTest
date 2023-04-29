@@ -41,7 +41,7 @@ public class ProductDAO {
 
     public void add(Product bean) {
 
-        String sql = "insert into Product values(null,?,?,?,?,?,?,?)";
+        String sql = "insert into Product values(null,?,?,?,?,?,?,?,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
             ps.setString(1, bean.getName());
@@ -51,6 +51,7 @@ public class ProductDAO {
             ps.setInt(5, bean.getStock());
             ps.setInt(6, bean.getCategory().getId());
             ps.setTimestamp(7, DateUtil.d2t(bean.getCreateDate()));
+            ps.setInt(8,bean.getSid());
             ps.execute();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -66,7 +67,7 @@ public class ProductDAO {
 
     public void update(Product bean) {
 
-        String sql = "update Product set name= ?, subTitle=?, orignalPrice=?,promotePrice=?,stock=?, cid = ?, createDate=? where id = ?";
+        String sql = "update Product set name= ?, subTitle=?, orignalPrice=?,promotePrice=?,stock=?, cid = ?, createDate=? ,sid = ? where id = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
             ps.setString(1, bean.getName());
@@ -76,7 +77,8 @@ public class ProductDAO {
             ps.setInt(5, bean.getStock());
             ps.setInt(6, bean.getCategory().getId());
             ps.setTimestamp(7, DateUtil.d2t(bean.getCreateDate()));
-            ps.setInt(8, bean.getId());
+            ps.setInt(8, bean.getSid());
+            ps.setInt(9,bean.getId());
             ps.execute();
 
         } catch (SQLException e) {
@@ -117,6 +119,7 @@ public class ProductDAO {
                 float promotePrice = rs.getFloat("promotePrice");
                 int stock = rs.getInt("stock");
                 int cid = rs.getInt("cid");
+                int sid = rs.getInt("sid");
                 Date createDate = DateUtil.t2d( rs.getTimestamp("createDate"));
 
                 bean.setName(name);
@@ -128,6 +131,7 @@ public class ProductDAO {
                 bean.setCategory(category);
                 bean.setCreateDate(createDate);
                 bean.setId(id);
+                bean.setSid(sid);
                 setFirstProductImage(bean);
             }
 
@@ -163,6 +167,7 @@ public class ProductDAO {
                 float promotePrice = rs.getFloat("promotePrice");
                 int stock = rs.getInt("stock");
                 Date createDate = DateUtil.t2d( rs.getTimestamp("createDate"));
+                int sid = rs.getInt("sid");
 
                 bean.setName(name);
                 bean.setSubTitle(subTitle);
@@ -172,6 +177,7 @@ public class ProductDAO {
                 bean.setCreateDate(createDate);
                 bean.setId(id);
                 bean.setCategory(category);
+                bean.setSid(sid);
                 setFirstProductImage(bean);
                 beans.add(bean);
             }
@@ -205,6 +211,7 @@ public class ProductDAO {
                 float orignalPrice = rs.getFloat("orignalPrice");
                 float promotePrice = rs.getFloat("promotePrice");
                 int stock = rs.getInt("stock");
+                int sid = rs.getInt("sid");
                 Date createDate = DateUtil.t2d( rs.getTimestamp("createDate"));
 
                 bean.setName(name);
@@ -214,6 +221,7 @@ public class ProductDAO {
                 bean.setStock(stock);
                 bean.setCreateDate(createDate);
                 bean.setId(id);
+                bean.setSid(sid);
 
                 Category category = new CategoryDAO().get(cid);
                 bean.setCategory(category);
@@ -295,6 +303,7 @@ public class ProductDAO {
                 float promotePrice = rs.getFloat("promotePrice");
                 int stock = rs.getInt("stock");
                 Date createDate = DateUtil.t2d( rs.getTimestamp("createDate"));
+                int sid = rs.getInt("sid");
 
                 bean.setName(name);
                 bean.setSubTitle(subTitle);
@@ -302,6 +311,7 @@ public class ProductDAO {
                 bean.setPromotePrice(promotePrice);
                 bean.setStock(stock);
                 bean.setCreateDate(createDate);
+                bean.setSid(sid);
                 bean.setId(id);
 
                 Category category = new CategoryDAO().get(cid);

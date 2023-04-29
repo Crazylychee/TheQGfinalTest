@@ -489,6 +489,22 @@ span.loginInputIcon span.glyphicon {
 	top: 9px;
 	color: #606060;
 }
+button.starButton{
+	border: 1px solid #C40000;
+	/*外边框*/
+	background-color: #C40000;
+	/*背景色: #C40000，和外边框一个颜色*/
+	text-align: center;
+	/*内容水平居中*/
+	line-height: 40px;
+	/*内容垂直居中*/
+	font-size: 16px;
+	/*字体大小: 16px*/
+	color: white;
+	/*字体颜色: white*/
+	font-family: arial;
+	/*字体arial*/
+}
 
 button.redButton {
 	color: white;

@@ -36,7 +36,7 @@ public class UserDAO {
 
     public void add(User bean) {
         //这里的空是不插入数据
-        String sql = "insert into user values(null ,? ,?)";
+        String sql = "insert into user values(null ,? ,?, null,null,null)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
             ps.setString(1, bean.getName());
@@ -210,11 +210,10 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
-        System.out.println(bean.getName());
-        System.out.println(bean.getPassword());
+//        System.out.println(bean.getName());
+//        System.out.println(bean.getPassword());
         return bean;
     }
 

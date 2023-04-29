@@ -9,10 +9,10 @@
 </div>
 
 <div class="productPageDiv">
-
+<%--		产品的图片--%>
 	<%@include file="imgAndInfo.jsp" %>
-	
+<%--	产品的评价--%>
 	<%@include file="productReview.jsp" %>
-	
+<%--	产品的细节，详情描述--%>
 	<%@include file="productDetail.jsp" %>
 </div>

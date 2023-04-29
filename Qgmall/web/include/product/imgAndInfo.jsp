@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
  
@@ -69,6 +67,10 @@ $(function(){
         );      
         return false;
     });
+
+
+
+
     $(".buyLink").click(function(){
         var page = "forecheckLogin";
         $.get(
@@ -85,7 +87,8 @@ $(function(){
         );      
         return false;
     });
-     
+
+
     $("button.loginSubmitButton").click(function(){
         var name = $("#name").val();
         var password = $("#password").val();
@@ -192,6 +195,7 @@ $(function(){
             <span>数量</span>
             <span>
                 <span class="productNumberSettingSpan">
+<%--                    在前面的代码中设置了num了--%>
                 <input class="productNumberSetting" type="text" value="1">
                 </span>
                 <span class="arrow">
@@ -227,6 +231,10 @@ $(function(){
             <a class="buyLink" href="forebuyone?pid=${p.id}"><button class="buyButton">立即购买</button></a>
             <a href="#nowhere" class="addCartLink"><button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button></a>
         </div>
+        <div class="buyDiv">
+            <a class="starLink" href="fstorepage.jsp"><button class="starButton">店铺详情</button></a>
+        </div>
+
     </div>
      
     <div style="clear:both"></div>

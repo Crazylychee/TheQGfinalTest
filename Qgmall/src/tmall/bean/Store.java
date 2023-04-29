@@ -6,9 +6,9 @@ package tmall.bean;
  */
 public class Store {
     private int uid;
+    private String name;
     private int fans;
     private String description;
-    private String news;
 
     public int getUid() {
         return uid;
@@ -34,11 +34,11 @@ public class Store {
         this.description = description;
     }
 
-    public String getNews() {
-        return news;
+    public String getName() {
+        return name;
     }
 
-    public void setNews(String news) {
-        this.news = news;
+    public void setName(String name) {
+        this.name = name;
     }
 }

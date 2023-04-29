@@ -15,19 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sun.org.apache.xpath.internal.operations.Equals;
 import org.apache.commons.lang.StringUtils;
+import sun.security.timestamp.HttpTimestamper;
+import tmall.bean.*;
 import tmall.dao.*;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.web.util.HtmlUtils;
 
 import tmall.servlet.BaseBackServlet;
-import tmall.bean.Category;
-import tmall.bean.Order;
-import tmall.bean.OrderItem;
-import tmall.bean.Product;
-import tmall.bean.ProductImage;
-import tmall.bean.PropertyValue;
-import tmall.bean.Review;
-import tmall.bean.User;
 import tmall.comparator.ProductAllComparator;
 import tmall.comparator.ProductDateComparator;
 import tmall.comparator.ProductPriceComparator;
@@ -75,6 +69,10 @@ public class ForeServlet extends BaseForeServlet {
 
 		try {
 			user = userDAO.get(name, password);
+			Store store = storeDAO.get(user.getId());
+			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("store", store);
+
 		}catch (NullPointerException e){
 			if (null == user) {
 				request.setAttribute("msg", "账号密码错误");
@@ -82,15 +80,13 @@ public class ForeServlet extends BaseForeServlet {
 			}
 			e.printStackTrace();
 		}
-		request.getSession().setAttribute("user", user);
-
 		return "@forehome";
 	}
 
 	public String product(HttpServletRequest request, HttpServletResponse response, Page page) {
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		Product p = productDAO.get(pid);
-
+		Store s = storeDAO.get(p.getSid());
 		List<ProductImage> productSingleImages = productImageDAO.list(p, ProductImageDAO.type_single);
 		List<ProductImage> productDetailImages = productImageDAO.list(p, ProductImageDAO.type_detail);
 		p.setProductSingleImages(productSingleImages);
@@ -104,7 +100,8 @@ public class ForeServlet extends BaseForeServlet {
 
 		request.setAttribute("reviews", reviews);
 
-		request.setAttribute("p", p);
+		request.getSession().setAttribute("s",s);
+		request.getSession().setAttribute("p",p);
 		request.setAttribute("pvs", pvs);
 		return "product.jsp";
 	}
@@ -125,6 +122,8 @@ public class ForeServlet extends BaseForeServlet {
 	public String loginAjax(HttpServletRequest request, HttpServletResponse response, Page page) {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
+		System.out.println(name);
+		System.out.println(password);
 		User user = userDAO.get(name, password);
 
 		if (null == user) {
@@ -413,9 +412,7 @@ public class ForeServlet extends BaseForeServlet {
 		return "@forereview?oid=" + oid + "&showonly=true";
 	}
 
-	public String personpage(HttpServletRequest request, HttpServletResponse response, Page page){
-		return "personpage.jsp";
-	}
+
 
 	public String editInfo(HttpServletRequest request, HttpServletResponse response, Page page){
 
@@ -469,10 +466,11 @@ public class ForeServlet extends BaseForeServlet {
 		String fileName = user.getId()+ ".jpg";
 		String imageFolder;
 		String imageFolder_small=null;
+		String imageFolder_middle=null;
 
 		imageFolder = request.getSession().getServletContext().getRealPath("img/user");
 		imageFolder_small = request.getSession().getServletContext().getRealPath("img/user_small");
-
+		imageFolder_middle = request.getSession().getServletContext().getRealPath("img/user_middle");
 		//创建新文件 imageFolder 是用于存储图像文件的文件夹的路径，fileName 是文件的名称
 		File f = new File(imageFolder, fileName);
 		//调用 f.getParentFile() 方法获取文件的父文件夹，并对其进行创建，以创建新的文件夹
@@ -499,7 +497,10 @@ public class ForeServlet extends BaseForeServlet {
 					ImageIO.write(img, "jpg", f);
 
 					File f_small = new File(imageFolder_small, fileName);
-					ImageUtil.resizeImage(f, 217, 190, f_small);
+					File f_middle = new File(imageFolder_middle, fileName);
+
+					ImageUtil.resizeImage(f,56,56,f_small);
+					ImageUtil.resizeImage(f, 217, 190, f_middle);
 				}
 				catch(Exception e){
 					e.printStackTrace();
@@ -513,4 +514,67 @@ public class ForeServlet extends BaseForeServlet {
 
 		return "personpage.jsp";
 	}
+
+	public String registerstore(HttpServletRequest request, HttpServletResponse response, Page page){ return "registerstore.jsp"; }
+	public String registerS(HttpServletRequest request, HttpServletResponse response,Page page){
+		//		//获取user对象
+		User user = (User) request.getSession().getAttribute("user");
+//		if(storeDAO.isExist(user.getId())){
+//			return "storepage.jsp";
+//		};
+
+		//得到user的id
+		int id = user.getId();
+		//建立一个商店
+		Store store = new Store();
+
+		String name = request.getParameter("name");
+		String description = request.getParameter("description");
+		store.setUid(id);
+		//在数据库中添加商店
+		storeDAO.add(user,name,description);
+		request.getSession().setAttribute("store", store);
+		return "@registerSuccess.jsp";
+	}
+
+	public String storepage(HttpServletRequest request, HttpServletResponse response, Page page)
+	{return "storepage.jsp";}
+	public String personpage(HttpServletRequest request, HttpServletResponse response, Page page){return "personpage.jsp";}
+
+	public String staradd(HttpServletRequest request, HttpServletResponse response, Page page){
+		User user = (User) request.getSession().getAttribute("user");
+		Store store = (Store) request.getSession().getAttribute("s");
+		System.out.println(store.getUid());
+		if(!starDAO.isExist(user.getId(),store.getUid())) {
+			try {
+				System.out.println(user.getId());
+				starDAO.add(user.getId(), store.getUid());
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+			return "%success";
+		}
+
+		return "%fail";
+	}
+	public String stardelete(HttpServletRequest request, HttpServletResponse response, Page page){
+		User user = (User) request.getSession().getAttribute("user");
+		Store store = (Store) request.getSession().getAttribute("s");
+		System.out.println(store.getUid());
+		if(starDAO.isExist(user.getId(),store.getUid())) {
+			try {
+				System.out.println(user.getId());
+				starDAO.delete(user.getId(), store.getUid());
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+			return "%success";
+		}
+
+		return "%fail";
+	}
+
+
+
+
 }

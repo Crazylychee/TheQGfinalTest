@@ -11,6 +11,9 @@ import tmall.bean.Product;
 import tmall.bean.PropertyValue;
 import tmall.util.Page;
 
+/**
+ * 这个servlet把产品类传入session中，可以方便在其他地方找到产品属性
+ */
 public class ProductServlet extends BaseBackServlet {
 
 	

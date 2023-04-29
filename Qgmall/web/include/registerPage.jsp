@@ -73,7 +73,7 @@ $(function(){
 			<td class="registerTableLeftTD">密码确认</td>
 			<td class="registerTableRightTD"><input id="repeatpassword" type="password"   placeholder="请再次输入你的密码" > </td>
 		</tr>
-				
+<%--		是HTML表格元素的一个属性，它表示单元格应该横跨两列--%>
 		<tr>
 			<td colspan="2" class="registerButtonTD">
 				<a href="registerSuccess.jsp"><button>提   交</button></a>

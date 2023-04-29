@@ -1,5 +1,6 @@
 package tmall.dao;
 
+import tmall.bean.Store;
 import tmall.bean.User;
 import tmall.util.DBUtil;
 
@@ -17,7 +18,7 @@ public class StoreDAO {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select count(*) from User";
+            String sql = "select count(*) from Store";
 
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
@@ -30,21 +31,18 @@ public class StoreDAO {
         return total;
     }
 
-    public void add(User bean) {
+    public void add(User bean,String name,String description) {
         //这里的空是不插入数据
-        String sql = "insert into user values(null ,? ,?)";
+        String sql = "insert into Store values(? ,? ,? ,?)";
+        //perpareStatement预编译防sql注入
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
-            ps.setString(1, bean.getName());
-            ps.setString(2, bean.getPassword());
-
+            ps.setInt(1, bean.getId());
+            //初始粉丝数设置为零
+            ps.setInt(2, 0);
+            ps.setString(3, description);
+            ps.setString(4, name);
             ps.execute();
-
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt(1);
-                bean.setId(id);
-            }
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -74,7 +72,7 @@ public class StoreDAO {
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "delete from User where id = " + id;
+            String sql = "delete from Store where uid = " + id;
 
             s.execute(sql);
 
@@ -84,22 +82,24 @@ public class StoreDAO {
         }
     }
 
-    public User get(int id) {
-        User bean = null;
+    public Store get(int id) {
+        Store bean = null;
 
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
 
-            String sql = "select * from User where id = " + id;
+            String sql = "select * from Store where uid = " + id;
 
             ResultSet rs = s.executeQuery(sql);
 
             if (rs.next()) {
-                bean = new User();
+                bean = new Store();
                 String name = rs.getString("name");
                 bean.setName(name);
-                String password = rs.getString("password");
-                bean.setPassword(password);
-                bean.setId(id);
+                String description = rs.getString("description");
+                bean.setDescription(description);
+                int fans = rs.getInt("fans");
+                bean.setFans(fans);
+                bean.setUid(id);
             }
 
         } catch (SQLException e) {
@@ -116,7 +116,7 @@ public class StoreDAO {
     public List<User> list(int start, int count) {
         List<User> beans = new ArrayList<User>();
 
-        String sql = "select * from User order by id desc limit ?,? ";
+        String sql = "select * from Store order by uid desc limit ?,? ";
 
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 
@@ -149,70 +149,9 @@ public class StoreDAO {
         return beans;
     }
 
-    public boolean isExist(String name) {
-        User user = get(name);
-        return user!=null;
+    public boolean isExist(int id) {
+        Store store = get(id);
+        return store!=null;
 
     }
-
-    public User get(String name) {
-        User bean = null;
-
-        String sql = "select * from User where name = ?";
-        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, name);
-            ResultSet rs =ps.executeQuery();
-
-            if (rs.next()) {
-                bean = new User();
-                int id = rs.getInt("id");
-                bean.setName(name);
-                String password = rs.getString("password");
-                bean.setPassword(password);
-                bean.setId(id);
-            }
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-        return bean;
-    }
-
-    public User get(String name, String password) {
-        User bean = null;
-
-        String sql = "select * from User where name = ? and password=?";
-        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, name);
-            ps.setString(2, password);
-            ResultSet rs =ps.executeQuery();
-
-            if (rs.next()) {
-                bean = new User();
-                int id = rs.getInt(1);
-
-                name = rs.getString("name");
-                bean.setName(name);
-                password = rs.getString("password");
-                bean.setPassword(password);
-                String destination = rs.getString("destination");
-                bean.setDestination(destination);
-                String number = rs.getString("number");
-                bean.setNumber(number);
-                String email = rs.getString("email");
-                bean.setEmail(email);
-                bean.setId(id);
-            }
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-        System.out.println(bean.getName());
-        System.out.println(bean.getPassword());
-        return bean;
-    }
-
-
 }

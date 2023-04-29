@@ -11,7 +11,7 @@
 <title>${user.name}的个人中心</title>
 
 <div>
-    <button><img src="img/user_small/${user.id}.jpg"/></button>
+    <button><img src="img/user_middle/${user.id}.jpg"/></button>
     <div>
         <p class="site-author-name" itemprop="name">用户名：${user.name}</p>
         <p class="site-author-name" itemprop="name">手机号：${user.number}</p>
