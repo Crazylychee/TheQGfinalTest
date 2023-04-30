@@ -29,8 +29,8 @@
 			</div>
             <div class="descColumn">
 			    <span class="descColumnTitle">支付方式</span>
-			    <a href="#nowhere" >快捷支付</a> 
-			    <a href="#nowhere" >信用卡</a> 
+			    <a href="https://crazylychee.github.io" >我的博客</a>
+			    <a href="#nowhere" >信用卡</a>
 			    <a href="#nowhere" >蚂蚁花呗</a>
 			    <a href="#nowhere" >货到付款</a>
 			</div>
@@ -41,7 +41,7 @@
 			</div>
             <div class="descColumn">
 			    <span class="descColumnTitle">qg购物网</span>
-			    <a href="#nowhere" ><img src="img/site/ma.png"></a> 
+			    <a href="#nowhere" ><img src="img/site/ma.png"></a>
 			</div>
 			
     </div>

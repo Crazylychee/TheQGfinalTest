@@ -16,3 +16,12 @@
 <div>
     <a href="editInfoS.jsp">修改资料</a>
 </div>
+
+
+<div>
+    <div>
+        <a href="admin_category_list" ><button class="starButton"><span class="glyphicon glyphicon-shopping-cart"></span>发布商品</button></a>
+        <a href="admin_category_list" ><button class="starButton"><span class="glyphicon glyphicon-shopping-cart"></span>订单管理</button></a>
+        <a href="forechat?rid=${s.uid}" class="chatwindow"><button class="starButton"><span class="glyphicon glyphicon-shopping-cart"></span>店铺消息</button></a>
+    </div>
+</div>

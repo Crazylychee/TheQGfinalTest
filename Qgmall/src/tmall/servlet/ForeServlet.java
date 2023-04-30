@@ -606,4 +606,31 @@ public class ForeServlet extends BaseForeServlet {
 		return "chat.jsp";
 	}
 
+	public String storeputpage(HttpServletRequest request, HttpServletResponse response, Page page){
+
+
+
+
+
+		return "storeputpage.jsp";
+	}
+
+	public String storemanagepage(HttpServletRequest request, HttpServletResponse response, Page page){
+
+
+
+
+
+		return "storemanagepage.jsp";
+	}
+
+	public String storeput(HttpServletRequest request, HttpServletResponse response, Page page){
+
+
+
+
+
+		return "storeputpage.jsp";
+	}
+
 }
