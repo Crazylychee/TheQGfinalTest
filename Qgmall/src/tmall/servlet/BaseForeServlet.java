@@ -30,6 +30,7 @@ public class BaseForeServlet extends HttpServlet{
 	protected UserDAO userDAO = new UserDAO();
 	protected StoreDAO storeDAO = new StoreDAO();
 	protected StarDAO starDAO = new StarDAO();
+	protected ChatroomDAO chatroomDAO = new ChatroomDAO();
 
 
 	//　Service是类GenericServlet中最重要的方法，每次客户向服务器发出请求时，服务器就会调用这个方法

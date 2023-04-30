@@ -1,38 +1,32 @@
 package tmall.bean;
 
+import java.util.Date;
+
 /**
  * @author yc
  * @date 2023/4/26 1:05
  */
 public class Chatroom {
-    private int rid;
-    private String createdTime;
-    private String updateTime;
+    private int id;
+    private User user1;
+    private User user2;
     private String message;
-    private int uid;
+    private Date createDate;
 
-    public int getRid() {
-        return rid;
+    public User getUser1() {
+        return user1;
     }
 
-    public void setRid(int rid) {
-        this.rid = rid;
+    public void setUser1(User user1) {
+        this.user1 = user1;
     }
 
-    public String getCreatedTime() {
-        return createdTime;
+    public User getUser2() {
+        return user2;
     }
 
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
+    public void setUser2(User user2) {
+        this.user2 = user2;
     }
 
     public String getMessage() {
@@ -43,11 +37,21 @@ public class Chatroom {
         this.message = message;
     }
 
-    public int getUid() {
-        return uid;
+
+
+    public int getId() {
+        return id;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

@@ -101,6 +101,6 @@ $(function(){
         </div>
         <a href="forestar" class="star"><button class="starButton"><span class="glyphicon glyphicon-shopping-cart"></span>关注店铺</button></a>
         <a href="forestar" class="starD"><button class="starButton"><span class="glyphicon glyphicon-shopping-cart"></span>取消关注店铺</button></a>
-        <a href="chat.jsp" class="chatwindow"><button class="starButton"><span class="glyphicon glyphicon-shopping-cart"></span>店铺客服</button></a>
+        <a href="forechat?rid=${s.uid}" class="chatwindow"><button class="starButton"><span class="glyphicon glyphicon-shopping-cart"></span>店铺客服</button></a>
     </div>
 </div>

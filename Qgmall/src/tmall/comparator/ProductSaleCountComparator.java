@@ -1,5 +1,3 @@
-
-
 package tmall.comparator;
 
 import java.util.Comparator;

@@ -423,24 +423,16 @@ public class ForeServlet extends BaseForeServlet {
 		System.out.println(!StringUtils.isEmpty(request.getParameter("name")));
 		if (!StringUtils.isEmpty(request.getParameter("name"))){
 			user.setName(request.getParameter("name"));}
-		else {
-			user.setName("空");
-		}
+
 		if (!StringUtils.isEmpty(request.getParameter("destination"))){
 			user.setDestination(request.getParameter("destination"));}
-		else{
-			user.setDestination("空");
-		}
+
 		if (!StringUtils.isEmpty(request.getParameter("number"))){
 			user.setNumber(request.getParameter("number"));}
-		else{
-			user.setNumber("空");
-		}
+
 		if (!StringUtils.isEmpty(request.getParameter("email"))){
 			user.setEmail(request.getParameter("email"));}
-		else{
-			user.setEmail("空");
-		}
+
 		new UserDAO().update(user);
 
 
@@ -519,9 +511,7 @@ public class ForeServlet extends BaseForeServlet {
 	public String registerS(HttpServletRequest request, HttpServletResponse response,Page page){
 		//		//获取user对象
 		User user = (User) request.getSession().getAttribute("user");
-//		if(storeDAO.isExist(user.getId())){
-//			return "storepage.jsp";
-//		};
+
 
 		//得到user的id
 		int id = user.getId();
@@ -574,7 +564,46 @@ public class ForeServlet extends BaseForeServlet {
 		return "%fail";
 	}
 
+	public String chatput(HttpServletRequest request, HttpServletResponse response, Page page){
+		User user = (User) request.getSession().getAttribute("user");
+		Store store = (Store) request.getSession().getAttribute("s");
+		int rid = store.getUid();
+		String message = request.getParameter("message");
+		System.out.println(message);
+		message = HtmlUtils.htmlEscape(message);
+		System.out.println(message);
+		Chatroom chatroom = new Chatroom();
+
+		chatroom.setUser1(user);
+		chatroom.setUser2(userDAO.get(rid));
+		chatroom.setMessage(message);
+		chatroom.setCreateDate(new Date());
+
+		try {
+			chatroomDAO.add(chatroom);
+		}catch (NullPointerException e){
+			e.printStackTrace();
+		}
+		return "chat.jsp";
+	}
+
+	public String fstorepage(HttpServletRequest request, HttpServletResponse response, Page page){
 
 
+
+
+		return "storepage.jsp";
+	}
+	public String chat(HttpServletRequest request, HttpServletResponse response, Page page) {
+		User user = (User) request.getSession().getAttribute("user");
+		int rid = Integer.parseInt(request.getParameter("rid"));
+		List<Chatroom> chatroom1s = chatroomDAO.get(rid,user.getId());
+		List<Chatroom> chatroom2s = chatroomDAO.get(user.getId(),rid);
+
+		request.setAttribute("chatroom1s", chatroom1s);
+		request.setAttribute("chatroom2s", chatroom2s);
+
+		return "chat.jsp";
+	}
 
 }

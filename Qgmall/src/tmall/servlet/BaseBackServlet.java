@@ -34,6 +34,9 @@ public abstract class BaseBackServlet extends HttpServlet {
 	protected PropertyValueDAO propertyValueDAO = new PropertyValueDAO();
 	protected ReviewDAO reviewDAO = new ReviewDAO();
 	protected UserDAO userDAO = new UserDAO();
+	protected ChatroomDAO chatroomDAO = new ChatroomDAO();
+
+
 
 	/**
 	 *
