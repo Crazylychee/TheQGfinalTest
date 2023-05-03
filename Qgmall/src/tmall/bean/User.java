@@ -61,19 +61,22 @@ public class User {
         this.email = email;
     }
 
-    public String getAnonymousname(String username){
-        if (null==username){
+    public String getAnonymousName(){
+        if(null==name)
             return null;
-        }
-        //substring 方法是取左边不取右边的吗？
-        if (username.length()<=2){
-            return username.substring(0,1)+'*';
-        }
-        char[] rs = username.toCharArray();
 
-        for (int i = 1; i < username.length()-1; i++) {
-            rs[i]='*';
+        if(name.length()<=1)
+            return "*";
+
+        if(name.length()==2)
+            return name.substring(0,1) +"*";
+
+        char[] cs =name.toCharArray();
+        for (int i = 1; i < cs.length-1; i++) {
+            cs[i]='*';
         }
-        return new String(rs);
+        return new String(cs);
+
+
     }
 }
